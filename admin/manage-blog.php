@@ -19,7 +19,9 @@ if (isset($_GET['delete'])){
     $message=$blog->deleteBlogInfo($id);
 }
 
+
 $queryResult=$blog->viewBlogInfo();
+
 ?>
 
 <!DOCTYPE html>
@@ -37,32 +39,29 @@ $queryResult=$blog->viewBlogInfo();
         <div class="col-sm-11 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-dark">
-                        <thead>
+                    <table class="table table-bordered">
+                        <thead class="table-dark ">
                         <tr>
                             <th scope="col">SL NO</th>
                             <th scope="col">Category Name</th>
                             <th scope="col">Blog Title</th>
-                            <th scope="col">Short Description</th>
-                            <th scope="col">Long Description</th>
-                            <th scope="col">Blog Image</th>
                             <th scope="col">Publication Status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php while ($data=mysqli_fetch_assoc($queryResult)) {?>
+                        <?php
+                            $i=1;
+                            while ($data=mysqli_fetch_assoc($queryResult)) {?>
                             <tr>
-                                <th scope="row"><?php echo $data['id']?></th>
-                                <td><?php echo $data['category_name']?></td>
-                                <td><?php echo $data['blog_title']?></td>
-                                <td><?php echo $data['short_description']?></td>
-                                <td><?php echo $data['long_description']?></td>
-                                <td><?php echo $data['blog_image']?></td>
-                                <td><?php echo $data['status']?></td>
+                                <th scope="row"><?php echo  $i++; ?></th>
+                                <td><?php echo $data['category_name'] ?></td>
+                                <td><?php echo $data['blog_title'] ?></td>
+                                <td><?php echo $data['status'] == 1 ? 'Published' : 'Unpublished' ?></td>
                                 <td>
-                                    <a href="blogEdit.php?id=<?php echo $data['id']?>">Edit</a>
-                                    <a href="?delete=true&id=<?php echo $data['id']?>" onclick="return confirm('Are you sure delete this !!');">Delete</a>
+                                    <a href="blogView.php?id=<?php echo $data['id']; ?>">View</a>
+                                    <a href="blogEdit.php?id=<?php echo $data['id']; ?>">Edit</a>
+                                    <a href="?delete=true&id=<?php echo $data['id']; ?>" onclick="return confirm('Are you sure delete this !!');">Delete</a>
                                 </td>
                             </tr>
                         <?php }?>

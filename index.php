@@ -1,3 +1,13 @@
+<?php
+    require_once 'vendor/autoload.php';
+    $application = new App\classes\Application();
+
+    $queryResult = $application->getAllPublishedBlogInfo();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,32 +27,7 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php include 'MenuForUser.php'; ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -56,59 +41,20 @@
 
     <!-- Page Features -->
     <div class="row text-center">
-
+        <?php while ($blogInfo = mysqli_fetch_assoc($queryResult)) { ?>
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                <img class="card-img-top" src="app/<?php echo $blogInfo['blog_image']; ?>" alt=""/>
                 <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                    <h4 class="card-title"><?php echo $blogInfo['blog_title']; ?></h4>
+                    <p class="card-text"><?php echo $blogInfo['short_description']; ?></p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
+                    <a href="viewDetailBlogInfo.php?id=<?php echo $blogInfo['id']?>" class="btn btn-primary">Find Out More!</a>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card">
-                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Find Out More!</a>
-                </div>
-            </div>
-        </div>
-
+        <?php } ?>
     </div>
     <!-- /.row -->
 

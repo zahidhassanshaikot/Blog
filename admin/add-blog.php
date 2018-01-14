@@ -8,7 +8,8 @@ if($_SESSION['id'] == null) {
 require_once '../vendor/autoload.php';
 $login = new App\classes\Login();
 $blog=new App\classes\Blog();
-use App\classes\Blog;
+
+$queryResult = $blog->getAllPublishedCategoryInfo();
 
 
 if(isset($_GET['logout'])) {
@@ -33,18 +34,19 @@ if(isset($_POST['btn'])){
 
 <div class="container" style="margin-top: 10px;">
     <div class="row">
-        <div class="col-sm-8 mx-auto">
+        <div class="col-sm-10 mx-auto">
             <div class="card">
                 <h4 class="text-success"><?php echo $message;?></h4>
                 <div class="card-body">
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-3 col-form-label">Category Name</label>
                             <div class="col-sm-9">
-                                <select name="category_name" class="form-control">
+                                <select name="category_id" class="form-control">
                                     <option>---Select Category Name---</option>
-                                    <option value="1">Category One</option>
-                                    <option value="2">Category Two</option>
+                                    <?php while ( $category = mysqli_fetch_assoc($queryResult)) { ?>
+                                    <option value="<?php echo $category['id']; ?>"><?php echo $category['category_name']; ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -63,13 +65,13 @@ if(isset($_POST['btn'])){
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Long Description</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" name="long_description"></textarea>
+                                <textarea class="form-control textarea" name="long_description" rows="10"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Blog Image</label>
                             <div class="col-sm-9">
-                                <input type="file"value="hi" name="blog_image" accept="image/*"/>
+                                <input type="file" name="blog_image" accept="image/*"/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -98,6 +100,13 @@ if(isset($_POST['btn'])){
 
 <script src="../assets/js/jquery-3.2.1.js"></script>
 <script src="../assets/js/bootstrap.bundle.js"></script>
+
+
+
+<script src="../assets/tinymce/js/tinymce/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'.textarea' });</script>
+
+
 <script src="../assets/js/bootstrap.min.js"></script>
 </body>
 </html>
