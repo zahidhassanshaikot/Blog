@@ -29,7 +29,7 @@ $blogInfo = mysqli_fetch_assoc($queryResult);
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Dashboard</title>
+    <title>Blog Info</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>

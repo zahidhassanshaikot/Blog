@@ -28,7 +28,7 @@ $queryResult=$blog->viewBlogInfo();
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Dashboard</title>
+    <title>Manage Blog</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>
@@ -38,6 +38,10 @@ $queryResult=$blog->viewBlogInfo();
     <div class="row">
         <div class="col-sm-11 mx-auto">
             <div class="card">
+                <div class="card-title m-auto">
+                    <h5 style="margin-top: 25px;"> <b><i>Manage blog</i></b></h5>
+
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead class="table-dark ">
@@ -59,9 +63,9 @@ $queryResult=$blog->viewBlogInfo();
                                 <td><?php echo $data['blog_title'] ?></td>
                                 <td><?php echo $data['status'] == 1 ? 'Published' : 'Unpublished' ?></td>
                                 <td>
-                                    <a href="blogView.php?id=<?php echo $data['id']; ?>">View</a>
-                                    <a href="blogEdit.php?id=<?php echo $data['id']; ?>">Edit</a>
-                                    <a href="?delete=true&id=<?php echo $data['id']; ?>" onclick="return confirm('Are you sure delete this !!');">Delete</a>
+                                    <a class="btn btn-primary" href="blogView.php?id=<?php echo $data['id']; ?>">View</a>
+                                    <a class="btn btn-success" href="blogEdit.php?id=<?php echo $data['id']; ?>">Edit</a>
+                                    <a class="btn btn-danger" href="?delete=true&id=<?php echo $data['id']; ?>" onclick="return confirm('Are you sure delete this !!');">Delete</a>
                                 </td>
                             </tr>
                         <?php }?>

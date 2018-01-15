@@ -7,7 +7,7 @@ if($_SESSION['id'] == null) {
 
 require_once '../vendor/autoload.php';
 $login = new App\classes\Login();
-$category=new App\classes\Category();
+$comments=new App\classes\BlogComments();
 
 
 if(isset($_GET['logout'])) {
@@ -16,17 +16,17 @@ if(isset($_GET['logout'])) {
 
 if (isset($_GET['delete'])){
     $id=$_GET['id'];
-    $message=$category->deleteCategoryInfo($id);
+    $message=$comments->deleteBlogComment($id);
 }
 
-$queryResult=$category->viewCategoryInfo();
+$queryResult=$comments->viewBlogComments();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Manage Category</title>
+    <title>Manage Comments</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>
@@ -37,31 +37,29 @@ $queryResult=$category->viewCategoryInfo();
         <div class="col-sm-10 mx-auto">
             <div class="card">
                 <div class="card-title m-auto">
-                    <h5 style="margin-top: 25px;"> <b><i>Manage Category</i></b></h5>
+                    <h5 style="margin-top: 25px;"> <b><i>Manage Comments</i></b></h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-dark">
                         <thead>
                         <tr>
                             <th scope="col">SL NO</th>
-                            <th scope="col">Category Name</th>
-                            <th scope="col">Category Description</th>
-                            <th scope="col">Publication Status</th>
+                            <th scope="col">Comment id</th>
+                            <th scope="col">Comments</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php while ($data=mysqli_fetch_assoc($queryResult)) {?>
-                        <tr>
-                            <th scope="row"><?php echo $data['id']?></th>
-                            <td><?php echo $data['category_name']?></td>
-                            <td><?php echo $data['category_description']?></td>
-                            <td><?php echo $data['status']?></td>
-                            <td>
-                                <a class="btn btn-success" href="categoryEdit.php?id=<?php echo $data['id']?>">Edit</a>
-                                <a class="btn btn-danger" href="?delete=true&id=<?php echo $data['id']?>" onclick="return confirm('Are you sure delete this !!');">Delete</a>
-                            </td>
-                        </tr>
+                        <?php $i=1; while ($data=mysqli_fetch_assoc($queryResult)) {?>
+                            <tr>
+                                <th scope="row"><?php echo $i; $i++; ?></th>
+                                <th scope="row"><?php echo $data['id']?></th>
+                                <td><?php echo $data['comment']?></td>
+                                <td>
+<!--                                    <a href="BlogCommentEdit.php?id=--><?php //echo $data['id']?><!--">Edit</a>-->
+                                    <a class="btn btn-danger" href="?delete=true&id=<?php echo $data['id']?>" onclick="return confirm('Are you sure delete this !!');">Delete</a>
+                                </td>
+                            </tr>
                         <?php }?>
                         </tbody>
                     </table>

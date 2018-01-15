@@ -80,8 +80,8 @@ $queryResultForCmds=$application->getAllBlogCommentsById($id);
 
                         <table class="table ">
                             <tr>
-                                <th "><?php echo $i; $i++;?></th>
-                                <td ><?php echo $cmdResult['comment'];?></td>
+                                <th width="5%"align="right""><?php echo $i; $i++;?></th>
+                                <td width="95%"><?php echo $cmdResult['comment'];?></td>
                             </tr>
                         </table>
 

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="dashboard.php">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,6 +26,9 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="manage-blog.php">Manage Blog</a>
                     </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link"  href="manage-comments.php">Manage Comments</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

@@ -26,7 +26,7 @@ if(isset($_POST['btn'])){
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Dashboard</title>
+    <title>Add Blog</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 <body>
@@ -36,7 +36,9 @@ if(isset($_POST['btn'])){
     <div class="row">
         <div class="col-sm-10 mx-auto">
             <div class="card">
-                <h4 class="text-success"><?php echo $message;?></h4>
+                <div class="card-title m-auto">
+                    <h5 class="text-success" style="margin-top: 25px;"> <b><i><?php echo $message;?></i></b></h5>
+                </div>
                 <div class="card-body">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="form-group row">
